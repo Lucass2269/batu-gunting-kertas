@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Batu Gunting Kertas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="card">
+    <h1>Game Batu Gunting Kertas</h1>
+
+    <form method="post">
+        <button name="pilihan" value="batu">🪨 Batu</button>
+        <button name="pilihan" value="gunting">✂️ Gunting</button>
+        <button name="pilihan" value="kertas">📄 Kertas</button>
+    </form>
+
+    {% if hasil %}
+        <div class="hasil">
+            <p>Kamu pilih: <b>{{ pilihan_user }}</b></p>
+            <p>Bot pilih: <b>{{ pilihan_bot }}</b></p>
+            <h2>{{ hasil }}</h2>
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>

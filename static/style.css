@@ -1,0 +1,33 @@
+body {
+    background: linear-gradient(135deg, #1e2a44, #3a4f7a);
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: white;
+}
+
+.card {
+    background: rgba(255,255,255,0.1);
+    width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+button {
+    font-size: 18px;
+    padding: 12px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+.hasil {
+    margin-top: 20px;
+    font-size: 18px;
+}
