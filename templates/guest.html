@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Guest</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="card">
+    <h1>👤 Guest Page</h1>
+    <div class="info">
+        Kamu login sebagai Guest. Hanya bisa melihat hasil permainan Player.
+    </div>
+
+    <h3 style="margin-top:20px;">📋 Leaderboard</h3>
+
+    <table style="width:100%; margin-top:10px; border-collapse: collapse;">
+        <tr style="background: rgba(0,0,0,0.05);">
+            <th style="padding:10px;">Username</th>
+            <th>Menang</th>
+            <th>Kalah</th>
+            <th>Seri</th>
+        </tr>
+
+        {% if leaderboard %}
+            {% for user, data in leaderboard.items() %}
+            <tr style="text-align:center;">
+                <td style="padding:8px;">{{ user }}</td>
+                <td>{{ data.win }}</td>
+                <td>{{ data.lose }}</td>
+                <td>{{ data.draw }}</td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="4" style="text-align:center; padding:20px; opacity:0.6;">
+                    Belum ada data pertandingan
+                </td>
+            </tr>
+        {% endif %}
+    </table>
+
+    <br>
+    <a href="/logout" class="logout-btn">Logout</a>
+</div>
+
+</body>
+</html>

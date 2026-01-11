@@ -1,33 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    background: linear-gradient(135deg, #1e2a44, #3a4f7a);
-    font-family: Arial, sans-serif;
-    text-align: center;
-    color: white;
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(#dfefff, #eef6ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+/* CARD UTAMA */
 .card {
-    background: rgba(255,255,255,0.1);
-    width: 400px;
-    margin: 100px auto;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    width: 720px;
+    max-width: 92%;
+    background: linear-gradient(#f8fcff, #eef5ff);
+    border-radius: 18px;
+    padding: 36px 40px 34px 40px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(80,120,180,0.15);
+    border: 1px solid #d6e6f6;
 }
 
-button {
-    font-size: 18px;
-    padding: 12px 20px;
-    margin: 10px;
-    border: none;
-    border-radius: 10px;
+/* JUDUL */
+.card h1 {
+    margin: 0 0 12px 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: #4f6f95;
+}
+
+/* INFO TEXT */
+.info {
+    color: #6f86a3;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+/* SKOR */
+.score {
+    margin: 12px 0 28px;
+    font-size: 16px;
+    opacity: 0.85;
+}
+
+/* AREA BUTTON */
+.choices {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    margin-bottom: 24px;
+}
+
+/* TOMBOL PILIHAN */
+.choice-btn {
+    min-width: 150px;
+    padding: 14px 22px;
+    border-radius: 14px;
+    border: 1px solid #cfe0f2;
+    background: linear-gradient(#cfe5ff, #b9d6f5);
+    color: #345a86;
+    font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
+    box-shadow: 0 4px 10px rgba(120,160,210,0.25);
+    transition: all 0.2s ease;
 }
 
-button:hover {
-    transform: scale(1.1);
+.choice-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(120,160,210,0.35);
 }
 
-.hasil {
+/* TOMBOL LOGOUT */
+.logout-btn {
+    margin-top: 32px;
+    padding: 12px 42px;
+    border-radius: 14px;
+    font-size: 16px;
+}
+
+
+/* HASIL */
+.result {
+    font-size: 20px;
+    margin: 12px 0 10px 0;
+    font-weight: 500;
+    color: #4f6f95;
+}
+
+/* =========================
+   INTERAKSI TOMBOL PILIHAN
+========================= */
+.choice-btn {
+    transition: all 0.25s ease;
+}
+
+.choice-btn.selected {
+    transform: scale(1.08);
+    background: linear-gradient(135deg, #cfe6ff, #b7d8ff);
+    box-shadow: 0 0 18px rgba(120,180,255,0.6);
+}
+
+/* =========================
+   HASIL MENANG / KALAH / SERI
+========================= */
+.result-text {
     margin-top: 20px;
-    font-size: 18px;
+    font-size: 22px;
+    font-weight: 600;
+    animation: fadeIn 0.4s ease;
+}
+
+.result-win {
+    color: #2f9e44;
+    text-shadow: 0 0 10px rgba(47,158,68,0.5);
+}
+
+.result-lose {
+    color: #e03131;
+    animation: shake 0.4s;
+}
+
+.result-draw {
+    color: #1c7ed6;
+}
+
+/* =========================
+   ANIMASI
+========================= */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================
+   ANIMASI MENANG MATCH
+========================= */
+.match-win {
+    animation: winPop 1s ease;
+}
+
+@keyframes winPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+    100% { transform: scale(1); }
+}
+
+.battle-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    margin: 18px 0 10px;
+}
+
+.player-slot, .bot-slot {
+    font-size: 64px;
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.6);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
+}
+
+.vs-text {
+    font-weight: bold;
+    opacity: 0.6;
+}
+
+.pop {
+    animation: pop 0.25s ease;
+}
+
+@keyframes pop {
+    0% { transform: scale(0.7); opacity: 0.3; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+
+.shake {
+    animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    50% { transform: translateX(6px); }
+    75% { transform: translateX(-4px); }
+    100% { transform: translateX(0); }
+}
+
+/* =========================
+   EFFECT PILIHAN PLAYER
+========================= */
+.choice-btn.selected {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #dbeeff, #c3ddff);
+    box-shadow: 0 0 18px rgba(120,180,255,0.8);
+}
+
+/* =========================
+   EFFECT SLOT ICON
+========================= */
+.slot-win {
+    box-shadow: 0 0 20px rgba(80,200,120,0.8);
+}
+
+.slot-lose {
+    animation: shake 0.4s;
+}
+
+/* =========================
+   ANIMASI MENANG MATCH (CARD)
+========================= */
+.match-win {
+    animation: winPop 0.8s ease;
+}
+
+@keyframes winPop {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* =========================
+   ANIMASI KALAH MATCH
+========================= */
+.match-lose {
+    animation: loseShake 0.6s ease;
+}
+
+@keyframes loseShake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(6px); }
+    100% { transform: translateX(0); }
 }

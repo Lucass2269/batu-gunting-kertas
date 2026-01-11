@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="card">
+    <h1>📊 Dashboard Admin</h1>
+    <div class="info">
+        Panel ini menampilkan hasil pertandingan yang dimainkan oleh Player
+    </div>
+
+    <table style="width:100%; margin-top:20px; border-collapse: collapse;">
+        <tr style="background: rgba(0,0,0,0.05);">
+            <th style="padding:10px;">Username</th>
+            <th>Menang</th>
+            <th>Kalah</th>
+            <th>Seri</th>
+        </tr>
+
+        {% if leaderboard %}
+            {% for user, data in leaderboard.items() %}
+            <tr style="text-align:center;">
+                <td style="padding:8px;">{{ user }}</td>
+                <td>{{ data.win }}</td>
+                <td>{{ data.lose }}</td>
+                <td>{{ data.draw }}</td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="4" style="text-align:center; padding:20px; opacity:0.6;">
+                    Belum ada data pertandingan
+                </td>
+            </tr>
+        {% endif %}
+    </table>
+
+    <form method="POST" style="margin-top:30px;">
+        <button class="choice-btn" type="submit">🗑️ Reset Semua Data</button>
+    </form>
+
+    <br>
+    <a href="/logout" class="logout-btn">Logout</a>
+</div>
+
+</body>
+</html>

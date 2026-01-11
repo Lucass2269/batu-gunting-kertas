@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Batu Gunting Kertas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="game-wrapper">
+
+    <div class="card 
+{% if result and 'MENANG MATCH' in result %}match-win{% endif %}
+{% if result and 'KALAH MATCH' in result %}match-lose{% endif %}
+">
+
+
+        <h1 class="title">Batu Gunting Kertas</h1>
+        <div class="subtitle">Mode : Best of 3</div>
+
+        <div class="info">
+            <div>Ronde: {{ ronde }}</div>
+            <div>Skor Player: {{ skor_player }} | Skor Komputer: {{ skor_bot }}</div>
+        </div>
+
+        <!-- AREA DUEL -->
+        <div class="battle-area">
+            <div class="player-slot pop" id="playerSlot">
+                {% if player %}
+                    {{ '🪨' if player=='batu' else '✂️' if player=='gunting' else '📄' }}
+                {% else %}
+                    ❔
+                {% endif %}
+            </div>
+
+            <div class="vs-text">VS</div>
+
+            <div class="bot-slot pop" id="botSlot">
+                {% if bot %}
+                    {{ '🪨' if bot=='batu' else '✂️' if bot=='gunting' else '📄' }}
+                {% else %}
+                    ❔
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- HASIL -->
+        {% if result %}
+<div class="result-text
+    {% if 'Menang' in result %} result-win
+    {% elif 'Kalah' in result %} result-lose
+    {% else %} result-draw
+    {% endif %}
+">
+    {{ result }}
+</div>
+{% endif %}
+
+
+        <!-- FORM -->
+        <form method="POST" id="gameForm">
+            <input type="hidden" name="choice" id="choiceInput">
+
+            <div class="choice-group">
+                <button type="button" class="choice-btn" onclick="play('batu')">🪨 Batu</button>
+                <button type="button" class="choice-btn" onclick="play('gunting')">✂️ Gunting</button>
+                <button type="button" class="choice-btn" onclick="play('kertas')">📄 Kertas</button>
+            </div>
+        </form>
+
+        <a href="/logout" class="logout-btn">Logout</a>
+
+    </div>
+
+</div>
+
+<!-- SCRIPT -->
+<script>
+const icons = {
+    batu: "🪨",
+    gunting: "✂️",
+    kertas: "📄"
+};
+
+function play(choice) {
+    const buttons = document.querySelectorAll(".choice-btn");
+    const playerSlot = document.getElementById("playerSlot");
+    const botSlot = document.getElementById("botSlot");
+
+    // Reset tombol
+    buttons.forEach(btn => btn.classList.remove("selected"));
+
+    // Highlight tombol dipilih
+    const clickedBtn = event.target;
+    clickedBtn.classList.add("selected");
+
+    // Player langsung muncul
+    playerSlot.textContent = icons[choice];
+    playerSlot.classList.remove("pop");
+    void playerSlot.offsetWidth;
+    playerSlot.classList.add("pop");
+
+    // Bot kasih efek mikir sebentar
+    botSlot.textContent = "🎲";
+
+    setTimeout(() => {
+        document.getElementById("choiceInput").value = choice;
+        document.getElementById("gameForm").submit();
+    }, 350);
+}
+</script>
+
+{% if bot %}
+<script>
+    const botSlot = document.getElementById("botSlot");
+    botSlot.textContent = "{{ '🪨' if bot=='batu' else '✂️' if bot=='gunting' else '📄' }}";
+    botSlot.classList.remove("pop");
+    void botSlot.offsetWidth;
+    botSlot.classList.add("pop");
+</script>
+{% endif %}
+
+
+</body>
+</html>
